@@ -10,6 +10,7 @@
 #import "UIImage+ImageEffects.h"
 #import "UIImageView+WebCache.h"
 
+
 typedef struct IntegerInterval {
     CGFloat left;
     CGFloat right;
@@ -30,8 +31,9 @@ typedef struct IntegerInterval {
     UIPageControl *_pageControl;
     
     NSInteger _count;
-    // 图片View 数组
-    NSArray *_imageViewList;
+    // 滚动Cell 数组
+    NSMutableArray <CPCardCell *>*_cardCellList;
+    NSMutableDictionary <NSString *, Class>*_registerMap;
     
     CGFloat _imageViewWidth;
     CGFloat _imageViewHeight;
@@ -97,6 +99,10 @@ typedef struct IntegerInterval {
 #pragma mark -- 初始化方法
 - (void)createMetadata
 {
+    _cardCellList = [NSMutableArray arrayWithCapacity:50];
+    _registerMap = [NSMutableDictionary dictionary];
+    _autoScrollToClickIndex = NO;
+    _showPageControl = YES;
 }
 
 - (void)createView
@@ -131,6 +137,16 @@ typedef struct IntegerInterval {
 }
 
 #pragma mark -- 接口函数
+- (void)registerClass:(nullable Class)cellClass forCellReuseIdentifier:(NSString *)identifier
+{
+    [_registerMap setObject:cellClass forKey:identifier];
+}
+
+- (void)setShowPageControl:(BOOL)showPageControl
+{
+    _pageControl.hidden = !showPageControl;
+}
+
 - (void)setSelectedIndex:(NSInteger)selectedIndex
 {
     [self setSelectedIndex:selectedIndex withAnimation:NO];
@@ -147,9 +163,15 @@ typedef struct IntegerInterval {
         return;
     }
     _selectedIndex = selectedIndex;
+    _pageControl.currentPage = _selectedIndex;
+    
     if (animation) {
         [UIView animateWithDuration:0.3 animations:^{
             _mainScrollView.contentOffset = CGPointMake(_imageViewWidth*selectedIndex, 0);
+#warning 效率低
+            for (UIView *cell in _cardCellList) {
+                [cell layoutIfNeeded];
+            }
         } completion:^(BOOL finished) {
             if (finished) {
                 if ([self.delegate respondsToSelector:@selector(CPCardViewController:didSelectedIndex:)]) {
@@ -187,30 +209,32 @@ typedef struct IntegerInterval {
     CGFloat selectedImageHeight = _imageViewHeight;
     CGFloat zoomWidth = _zoomScale*selectedImageWidth;
     CGFloat zoomHeight = _zoomScale*selectedImageHeight;
-    [_imageViewList makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    NSMutableArray *imageViewList = [NSMutableArray array];
+    
+    [_cardCellList makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [_cardCellList removeAllObjects];
+    
     for (NSInteger i = 0; i < _count; i ++) {
-        NSURL *url = [self.delegate CPCardViewController:self frontUrlAtIndex:i];
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(_scrollSideSpace + _imageViewWidth*i, (CGRectGetHeight(_frame) - _imageViewHeight)/2, _imageViewWidth, _imageViewHeight)];
-        [_mainScrollView addSubview:imageView];
-        imageView.contentMode = UIViewContentModeScaleToFill;
-        if (i != 0)
-        {
-            imageView.bounds = CGRectMake(0, 0, zoomWidth, zoomHeight);
-        }
-        [imageView sd_setImageWithURL:url placeholderImage:nil];
-        [imageViewList addObject:imageView];
-        imageView.tag = i;
-        if ([self.delegate respondsToSelector:@selector(CPCardViewController:didClickIndex:isSelectedIndex:)]) {
-            imageView.userInteractionEnabled = YES;
-            [imageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(actionClickImage:)]];
+        CPCardCell *cell = nil;
+        if (_registerMap.count <= 0) {
+            cell = [[CPCardCell alloc] init];
         }
         else
         {
-            imageView.userInteractionEnabled = NO;
+            cell = [[_registerMap.allValues.firstObject alloc]init];
+        }
+        cell.frame = CGRectMake(_scrollSideSpace + _imageViewWidth*i, (CGRectGetHeight(_frame) - _imageViewHeight)/2, _imageViewWidth, _imageViewHeight);
+        cell.cp_maxWidth = _imageViewWidth;
+        cell.cp_maxHeight = _imageViewHeight;
+        [_mainScrollView addSubview:cell];
+        [_cardCellList addObject:cell];
+        [self.delegate CPCardViewController:self fillCell:cell AtIndex:i];
+        cell.tag = i;
+        [cell addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(actionClickImage:)]];
+        if (i != 0)
+        {
+            cell.bounds = CGRectMake(0, 0, zoomWidth, zoomHeight);
         }
     }
-    _imageViewList = imageViewList;
     _mainScrollView.contentSize = CGSizeMake(selectedImageWidth*_count + _scrollSideSpace*2 , 0);
     _pageControl.numberOfPages = _count;
     [self updateBlurImageView];
@@ -239,15 +263,16 @@ typedef struct IntegerInterval {
         return;
     }
     
+    // 获取当前照片
+    NSInteger selectedIndex = [self displayIndexForOffsetX:_mainScrollView.contentOffset.x];
     // 避免当按到 -1 或者 count+1 的时候触发这个事件
-    if (_mainScrollView.contentOffset.x < 0 ||
-        _mainScrollView.contentOffset.x > (_count - 1)*_imageViewWidth) {
+    if (selectedIndex < 0 ||
+        selectedIndex >= _count) {
         return;
     }
-    
-    // 获取当前照片
-    _selectedIndex = [self currenDisplayIndex];
+    _selectedIndex = selectedIndex;
     _pageControl.currentPage = _selectedIndex;
+    
     [self updateBlurImageView];
     if ([self.delegate respondsToSelector:@selector(CPCardViewController:didSelectedIndex:)]) {
         [self.delegate CPCardViewController:self didSelectedIndex:_selectedIndex];
@@ -265,13 +290,13 @@ typedef struct IntegerInterval {
 {
     CGFloat needTargetOffsetX = scrollView.contentOffset.x + velocity.x*CGRectGetWidth([UIScreen mainScreen].bounds);
     if (needTargetOffsetX < 0) {
-        *targetContentOffset = CGPointMake(0, 0);
         [self willScrollToIndex:0];
+        *targetContentOffset = CGPointMake(0, 0);
         return;
     }
     if (needTargetOffsetX > scrollView.contentSize.width - CGRectGetWidth(_frame)) {
-        *targetContentOffset = CGPointMake(scrollView.contentSize.width, 0);
         [self willScrollToIndex:[self.delegate numberOfUrlInCPCardViewController:self] - 1];
+        *targetContentOffset = CGPointMake(scrollView.contentSize.width, 0);
         return;
     }
     
@@ -291,8 +316,8 @@ typedef struct IntegerInterval {
         actualTargetCenterX = (preImageCount*_imageViewWidth - _imageViewWidth/2 + _scrollSideSpace);
     }
     CGFloat actualTargetOffsetX = actualTargetCenterX - CGRectGetWidth(_frame)/2;
-    *targetContentOffset = CGPointMake(actualTargetOffsetX, 0);
     [self willScrollToIndex:(NSInteger)nearbyintf(actualTargetOffsetX/_imageViewWidth)];
+    *targetContentOffset = CGPointMake(actualTargetOffsetX, 0);
 }
 
 #pragma mark -- action area
@@ -302,6 +327,10 @@ typedef struct IntegerInterval {
     if ([self.delegate respondsToSelector:@selector(CPCardViewController:didClickIndex:isSelectedIndex:)]) {
         [self.delegate CPCardViewController:self didClickIndex:index isSelectedIndex:index == _selectedIndex];
     }
+    if (_autoScrollToClickIndex && index != _selectedIndex) {
+        [self willScrollToIndex:index];
+        [self setSelectedIndex:index withAnimation:YES];
+    }
 }
 
 
@@ -309,6 +338,7 @@ typedef struct IntegerInterval {
 // 滚动时改变大小
 - (void)adjustImageViewSizeWhenScroll
 {
+    _pageControl.currentPage = [self displayIndexForOffsetX:_mainScrollView.contentOffset.x];
     CGFloat selectedImageWidth = _imageViewWidth;
     CGFloat selectedImageHeight = _imageViewHeight;
     CGFloat scrollSideSpace = _scrollSideSpace;
@@ -318,21 +348,20 @@ typedef struct IntegerInterval {
     CGFloat windowOffset = (CGRectGetWidth(_frame) - selectedImageWidth)/2;
     
     for (NSInteger i = 0; i < _count; i++) {
-        UIImageView *imageView = _imageViewList[i];
+        CPCardCell *cell = _cardCellList[i];
         //当前窗口范围为  offsetX ~ offsetX + selectedImageWidth
         IntegerInterval iWindow = {i*selectedImageWidth, (i + 1)*selectedImageWidth};
-        
         IntegerInterval actWindow = {offsetX + windowOffset - scrollSideSpace, offsetX + selectedImageWidth + windowOffset - scrollSideSpace};
         BOOL isCross = [self isCrossBetween:iWindow with:actWindow];
         if (isCross)
         {
             CGFloat biasValue = fabs(iWindow.left - actWindow.left);
             CGFloat biasScaleValue = biasValue/selectedImageWidth;
-            imageView.bounds = CGRectMake(0, 0, selectedImageWidth - zoomWidthBias*biasScaleValue, selectedImageHeight - zoomHeightBias*biasScaleValue);
+            cell.bounds = CGRectMake(0, 0, selectedImageWidth - zoomWidthBias*biasScaleValue, selectedImageHeight - zoomHeightBias*biasScaleValue);
         }
         else
         {
-            imageView.bounds = CGRectMake(0, 0, _zoomScale*selectedImageWidth, _zoomScale*selectedImageHeight);
+            cell.bounds = CGRectMake(0, 0, _zoomScale*selectedImageWidth, _zoomScale*selectedImageHeight);
         }
     }
 }
@@ -348,9 +377,9 @@ typedef struct IntegerInterval {
 }
 
 // 当前的显示索引
-- (NSInteger)currenDisplayIndex
+- (NSInteger)displayIndexForOffsetX:(CGFloat)offsetX
 {
-    NSInteger index = (NSInteger) nearbyint(_mainScrollView.contentOffset.x/_imageViewWidth);
+    NSInteger index = (NSInteger) nearbyint(offsetX/_imageViewWidth);
     if (index < _count) {
         return index;
     }

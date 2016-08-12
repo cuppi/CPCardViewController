@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "08395C6281D385195507FF6BB15B0FDDA047B7A3",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "2E8FA8C984D85709250173441B2FACED155777A9" : 0,
+    "08395C6281D385195507FF6BB15B0FDDA047B7A3" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "A482226B-A71D-4373-BC3D-2FA01C188701",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "2E8FA8C984D85709250173441B2FACED155777A9" : "CPCardViewControllerDemo\/CPCardViewControllerDemo\/",
+    "08395C6281D385195507FF6BB15B0FDDA047B7A3" : "CPCardViewControllerDemo\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "CPCardViewControllerDemo",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "CPCardViewControllerDemo.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/cuppi\/CPCardViewController.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "08395C6281D385195507FF6BB15B0FDDA047B7A3"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/cuppi\/CPCardViewController.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2E8FA8C984D85709250173441B2FACED155777A9"
+    }
+  ]
+}

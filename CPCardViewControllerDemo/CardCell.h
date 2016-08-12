@@ -1,13 +1,12 @@
 //
-//  CPCardViewCell.h
+//  CardCell.h
 //  CPCardViewControllerDemo
 //
 //  Created by cuppi on 2016/8/12.
 //  Copyright © 2016年 cuppi. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "CPCardCell.h"
 
-@interface CPCardViewCell : UIView
-
+@interface CardCell : CPCardCell
 @end

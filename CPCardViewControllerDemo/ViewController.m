@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 #import "CPCardViewController.h"
+#import "UIImageView+WebCache.h"
+#import "CardCell.h"
 
 @interface ViewController () <CPCardViewControllerDelegate>
 {
@@ -45,9 +47,11 @@
 {
     CGFloat screenWidth = [[UIScreen mainScreen] bounds].size.width;
     // vc 目前只能使用全局变量。因为内部代理问题 
-    _vc = [[CPCardViewController alloc] initWithFrame:CGRectMake(0, 100, screenWidth, 200) withImageViewWidth:screenWidth*0.8 withImageViewHeight:200*0.8 withZoomScale:0.7];
+    _vc = [[CPCardViewController alloc] initWithFrame:CGRectMake(0, 100, screenWidth, 200) withImageViewWidth:screenWidth*0.6 withImageViewHeight:200*0.7 withZoomScale:0.7];
     [self.view addSubview:[_vc view]];
     _vc.delegate = self;
+    _vc.autoScrollToClickIndex = YES;
+    [_vc registerClass:[CardCell class] forCellReuseIdentifier:@"CardCell"];
     [_vc reloadData];
 }
 
@@ -62,34 +66,19 @@
     return _smallImageUrls.count*3;
 }
 
-- (NSURL *)CPCardViewController:(CPCardViewController *)viewController frontUrlAtIndex:(NSInteger)index
-{
-    return [NSURL fileURLWithPath:_smallImageUrls[index%_smallImageUrls.count]];
-}
-
 - (NSURL *)CPCardViewController:(CPCardViewController *)viewController backUrlAtIndex:(NSInteger)index
 {
     return [NSURL fileURLWithPath:_bigImageUrls[index%_bigImageUrls.count]];
 }
 
-- (void)CPCardViewController:(CPCardViewController *)viewController
-            didSelectedIndex:(NSInteger)index
+- (void)CPCardViewController:(CPCardViewController *)viewController fillCell:(CPCardCell *)cell AtIndex:(NSInteger)index
 {
-    NSLog(@"%ld 被选择", index + 1);
+    [cell.imageView sd_setImageWithURL:[NSURL fileURLWithPath:_smallImageUrls[index%4]] placeholderImage:nil];
 }
 
-- (void)CPCardViewController:(CPCardViewController *)viewController
-               didClickIndex:(NSInteger)index
-             isSelectedIndex:(BOOL)isSelectedIndex
+- (void)CPCardViewController:(CPCardViewController *)viewController didClickIndex:(NSInteger)index isSelectedIndex:(BOOL)isSelectedIndex
 {
-    if (isSelectedIndex) {
-        NSLog(@"点击当前ImageView");
-    }
-    else
-    {
-        [viewController setSelectedIndex:index withAnimation:YES];
-    }
+     [viewController setSelectedIndex:index withAnimation:YES];
 }
-
 
 @end

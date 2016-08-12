@@ -7,13 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import <SDWebImage/UIImageView+WebCache.h>
+#import "CPCardCell.h"
 
 @class CPCardViewController;
 
 @protocol CPCardViewControllerDelegate <NSObject>
-- (NSURL *)CPCardViewController:(CPCardViewController *)viewController
-                frontUrlAtIndex:(NSInteger)index;
+
+- (void)CPCardViewController:(CPCardViewController *)viewController
+                    fillCell:(CPCardCell *)cell
+                     AtIndex:(NSInteger)index;
 
 - (NSURL *)CPCardViewController:(CPCardViewController *)viewController
                  backUrlAtIndex:(NSInteger)index;
@@ -35,6 +37,10 @@
 @end
 
 @interface CPCardViewController : NSObject
+
+@property (assign, nonatomic) BOOL autoScrollToClickIndex;
+@property (assign, nonatomic) BOOL showPageControl;
+
 @property (assign, nonatomic) id<CPCardViewControllerDelegate> delegate;
 @property (assign, nonatomic) NSInteger selectedIndex;
 - (instancetype)initWithFrame:(CGRect)frame
@@ -47,7 +53,7 @@
 - (instancetype)initWithFrame:(CGRect)frame
                 withZoomScale:(CGFloat)zoomScale;
 - (instancetype)initWithFrame:(CGRect)frame;
-
+- (void)registerClass:(Class)cellClass forCellReuseIdentifier:(NSString *)identifier;
 - (void)reloadData;
 - (UIView *)view;
 - (void)setSelectedIndex:(NSInteger)selectedIndex

@@ -21,7 +21,10 @@
 		BB5B6B9B1D5C8C3E002FB68D /* CPCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5B6B961D5C8C3E002FB68D /* CPCardViewController.m */; };
 		BB5B6B9C1D5C8C3E002FB68D /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5B6B981D5C8C3E002FB68D /* UIImage+ImageEffects.m */; };
 		BB5B6B9D1D5C8C3E002FB68D /* UIImageView+LBBlurredImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5B6B9A1D5C8C3E002FB68D /* UIImageView+LBBlurredImage.m */; };
-		BBF07F4A1D5D6B3D0069DE08 /* CPCardViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF07F491D5D6B3D0069DE08 /* CPCardViewCell.m */; };
+		BBF07F4D1D5D7B6A0069DE08 /* CPCardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF07F4C1D5D7B6A0069DE08 /* CPCardCell.m */; };
+		BBF07F531D5D9A240069DE08 /* CardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF07F521D5D9A240069DE08 /* CardCell.m */; };
+		BBF07F561D5D9E430069DE08 /* 首页-预售@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF07F541D5D9E430069DE08 /* 首页-预售@2x.png */; };
+		BBF07F571D5D9E430069DE08 /* 首页-预售@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF07F551D5D9E430069DE08 /* 首页-预售@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,8 +51,12 @@
 		BB5B6B981D5C8C3E002FB68D /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		BB5B6B991D5C8C3E002FB68D /* UIImageView+LBBlurredImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+LBBlurredImage.h"; sourceTree = "<group>"; };
 		BB5B6B9A1D5C8C3E002FB68D /* UIImageView+LBBlurredImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+LBBlurredImage.m"; sourceTree = "<group>"; };
-		BBF07F481D5D6B3D0069DE08 /* CPCardViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCardViewCell.h; sourceTree = "<group>"; };
-		BBF07F491D5D6B3D0069DE08 /* CPCardViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPCardViewCell.m; sourceTree = "<group>"; };
+		BBF07F4B1D5D7B6A0069DE08 /* CPCardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCardCell.h; sourceTree = "<group>"; };
+		BBF07F4C1D5D7B6A0069DE08 /* CPCardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPCardCell.m; sourceTree = "<group>"; };
+		BBF07F511D5D9A240069DE08 /* CardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardCell.h; sourceTree = "<group>"; };
+		BBF07F521D5D9A240069DE08 /* CardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardCell.m; sourceTree = "<group>"; };
+		BBF07F541D5D9E430069DE08 /* 首页-预售@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页-预售@2x.png"; sourceTree = "<group>"; };
+		BBF07F551D5D9E430069DE08 /* 首页-预售@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页-预售@3x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +95,8 @@
 				BB2D020F1D45E5D000AD53E3 /* image2.jpg */,
 				BB2D02101D45E5D000AD53E3 /* image3.jpg */,
 				BB2D02111D45E5D000AD53E3 /* image4.jpg */,
+				BBF07F541D5D9E430069DE08 /* 首页-预售@2x.png */,
+				BBF07F551D5D9E430069DE08 /* 首页-预售@3x.png */,
 				BB5B6B941D5C8C3E002FB68D /* CPCardViewController */,
 				BB2D01EC1D45E01B00AD53E3 /* CPCardViewControllerDemo */,
 				BB2D01EB1D45E01B00AD53E3 /* Products */,
@@ -116,6 +125,8 @@
 				BB2D01FB1D45E01B00AD53E3 /* LaunchScreen.storyboard */,
 				BB2D01FE1D45E01B00AD53E3 /* Info.plist */,
 				BB2D01ED1D45E01B00AD53E3 /* Supporting Files */,
+				BBF07F511D5D9A240069DE08 /* CardCell.h */,
+				BBF07F521D5D9A240069DE08 /* CardCell.m */,
 			);
 			path = CPCardViewControllerDemo;
 			sourceTree = "<group>";
@@ -131,14 +142,14 @@
 		BB5B6B941D5C8C3E002FB68D /* CPCardViewController */ = {
 			isa = PBXGroup;
 			children = (
+				BBF07F4B1D5D7B6A0069DE08 /* CPCardCell.h */,
+				BBF07F4C1D5D7B6A0069DE08 /* CPCardCell.m */,
 				BB5B6B951D5C8C3E002FB68D /* CPCardViewController.h */,
 				BB5B6B961D5C8C3E002FB68D /* CPCardViewController.m */,
 				BB5B6B971D5C8C3E002FB68D /* UIImage+ImageEffects.h */,
 				BB5B6B981D5C8C3E002FB68D /* UIImage+ImageEffects.m */,
 				BB5B6B991D5C8C3E002FB68D /* UIImageView+LBBlurredImage.h */,
 				BB5B6B9A1D5C8C3E002FB68D /* UIImageView+LBBlurredImage.m */,
-				BBF07F481D5D6B3D0069DE08 /* CPCardViewCell.h */,
-				BBF07F491D5D6B3D0069DE08 /* CPCardViewCell.m */,
 			);
 			path = CPCardViewController;
 			sourceTree = "<group>";
@@ -177,6 +188,7 @@
 				TargetAttributes = {
 					BB2D01E91D45E01B00AD53E3 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 437CFEKRCT;
 					};
 				};
 			};
@@ -205,7 +217,9 @@
 			files = (
 				BB2D01FD1D45E01B00AD53E3 /* LaunchScreen.storyboard in Resources */,
 				BB2D01FA1D45E01B00AD53E3 /* Assets.xcassets in Resources */,
+				BBF07F571D5D9E430069DE08 /* 首页-预售@3x.png in Resources */,
 				BB2D02141D45E5D000AD53E3 /* image3.jpg in Resources */,
+				BBF07F561D5D9E430069DE08 /* 首页-预售@2x.png in Resources */,
 				BB2D02151D45E5D000AD53E3 /* image4.jpg in Resources */,
 				BB2D02131D45E5D000AD53E3 /* image2.jpg in Resources */,
 				BB2D01F81D45E01B00AD53E3 /* Main.storyboard in Resources */,
@@ -268,11 +282,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBF07F531D5D9A240069DE08 /* CardCell.m in Sources */,
 				BB2D01F51D45E01B00AD53E3 /* ViewController.m in Sources */,
 				BB5B6B9C1D5C8C3E002FB68D /* UIImage+ImageEffects.m in Sources */,
 				BB5B6B9B1D5C8C3E002FB68D /* CPCardViewController.m in Sources */,
 				BB5B6B9D1D5C8C3E002FB68D /* UIImageView+LBBlurredImage.m in Sources */,
-				BBF07F4A1D5D6B3D0069DE08 /* CPCardViewCell.m in Sources */,
+				BBF07F4D1D5D7B6A0069DE08 /* CPCardCell.m in Sources */,
 				BB2D01F21D45E01B00AD53E3 /* AppDelegate.m in Sources */,
 				BB2D01EF1D45E01B00AD53E3 /* main.m in Sources */,
 			);

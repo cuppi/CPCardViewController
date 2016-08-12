@@ -1,0 +1,437 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3696848464CC745A74DEE901 /* libPods-CPCardViewControllerDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C9771559644E03E28F830E6 /* libPods-CPCardViewControllerDemo.a */; };
+		BB2D01EF1D45E01B00AD53E3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2D01EE1D45E01B00AD53E3 /* main.m */; };
+		BB2D01F21D45E01B00AD53E3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2D01F11D45E01B00AD53E3 /* AppDelegate.m */; };
+		BB2D01F51D45E01B00AD53E3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2D01F41D45E01B00AD53E3 /* ViewController.m */; };
+		BB2D01F81D45E01B00AD53E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB2D01F61D45E01B00AD53E3 /* Main.storyboard */; };
+		BB2D01FA1D45E01B00AD53E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB2D01F91D45E01B00AD53E3 /* Assets.xcassets */; };
+		BB2D01FD1D45E01B00AD53E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB2D01FB1D45E01B00AD53E3 /* LaunchScreen.storyboard */; };
+		BB2D02121D45E5D000AD53E3 /* image1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BB2D020E1D45E5D000AD53E3 /* image1.jpg */; };
+		BB2D02131D45E5D000AD53E3 /* image2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BB2D020F1D45E5D000AD53E3 /* image2.jpg */; };
+		BB2D02141D45E5D000AD53E3 /* image3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BB2D02101D45E5D000AD53E3 /* image3.jpg */; };
+		BB2D02151D45E5D000AD53E3 /* image4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BB2D02111D45E5D000AD53E3 /* image4.jpg */; };
+		BB5B6B9B1D5C8C3E002FB68D /* CPCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5B6B961D5C8C3E002FB68D /* CPCardViewController.m */; };
+		BB5B6B9C1D5C8C3E002FB68D /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5B6B981D5C8C3E002FB68D /* UIImage+ImageEffects.m */; };
+		BB5B6B9D1D5C8C3E002FB68D /* UIImageView+LBBlurredImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BB5B6B9A1D5C8C3E002FB68D /* UIImageView+LBBlurredImage.m */; };
+		BBF07F4A1D5D6B3D0069DE08 /* CPCardViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF07F491D5D6B3D0069DE08 /* CPCardViewCell.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0B58F083B0CABCC21C094D89 /* Pods-CPCardViewControllerDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CPCardViewControllerDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-CPCardViewControllerDemo/Pods-CPCardViewControllerDemo.release.xcconfig"; sourceTree = "<group>"; };
+		800CC026A9DDBF99BC70EF0D /* Pods-CPCardViewControllerDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CPCardViewControllerDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CPCardViewControllerDemo/Pods-CPCardViewControllerDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		9C9771559644E03E28F830E6 /* libPods-CPCardViewControllerDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CPCardViewControllerDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB2D01EA1D45E01B00AD53E3 /* CPCardViewControllerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CPCardViewControllerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB2D01EE1D45E01B00AD53E3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		BB2D01F01D45E01B00AD53E3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		BB2D01F11D45E01B00AD53E3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		BB2D01F31D45E01B00AD53E3 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		BB2D01F41D45E01B00AD53E3 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		BB2D01F71D45E01B00AD53E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		BB2D01F91D45E01B00AD53E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BB2D01FC1D45E01B00AD53E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		BB2D01FE1D45E01B00AD53E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BB2D020E1D45E5D000AD53E3 /* image1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image1.jpg; sourceTree = "<group>"; };
+		BB2D020F1D45E5D000AD53E3 /* image2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image2.jpg; sourceTree = "<group>"; };
+		BB2D02101D45E5D000AD53E3 /* image3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image3.jpg; sourceTree = "<group>"; };
+		BB2D02111D45E5D000AD53E3 /* image4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image4.jpg; sourceTree = "<group>"; };
+		BB5B6B951D5C8C3E002FB68D /* CPCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCardViewController.h; sourceTree = "<group>"; };
+		BB5B6B961D5C8C3E002FB68D /* CPCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPCardViewController.m; sourceTree = "<group>"; };
+		BB5B6B971D5C8C3E002FB68D /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		BB5B6B981D5C8C3E002FB68D /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		BB5B6B991D5C8C3E002FB68D /* UIImageView+LBBlurredImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+LBBlurredImage.h"; sourceTree = "<group>"; };
+		BB5B6B9A1D5C8C3E002FB68D /* UIImageView+LBBlurredImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+LBBlurredImage.m"; sourceTree = "<group>"; };
+		BBF07F481D5D6B3D0069DE08 /* CPCardViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPCardViewCell.h; sourceTree = "<group>"; };
+		BBF07F491D5D6B3D0069DE08 /* CPCardViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPCardViewCell.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BB2D01E71D45E01B00AD53E3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3696848464CC745A74DEE901 /* libPods-CPCardViewControllerDemo.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		256E90A3AED0A53806E2691F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				800CC026A9DDBF99BC70EF0D /* Pods-CPCardViewControllerDemo.debug.xcconfig */,
+				0B58F083B0CABCC21C094D89 /* Pods-CPCardViewControllerDemo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		3AA84044F5F2FDE7D4E5BFDB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9C9771559644E03E28F830E6 /* libPods-CPCardViewControllerDemo.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BB2D01E11D45E01B00AD53E3 = {
+			isa = PBXGroup;
+			children = (
+				BB2D020E1D45E5D000AD53E3 /* image1.jpg */,
+				BB2D020F1D45E5D000AD53E3 /* image2.jpg */,
+				BB2D02101D45E5D000AD53E3 /* image3.jpg */,
+				BB2D02111D45E5D000AD53E3 /* image4.jpg */,
+				BB5B6B941D5C8C3E002FB68D /* CPCardViewController */,
+				BB2D01EC1D45E01B00AD53E3 /* CPCardViewControllerDemo */,
+				BB2D01EB1D45E01B00AD53E3 /* Products */,
+				256E90A3AED0A53806E2691F /* Pods */,
+				3AA84044F5F2FDE7D4E5BFDB /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		BB2D01EB1D45E01B00AD53E3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BB2D01EA1D45E01B00AD53E3 /* CPCardViewControllerDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BB2D01EC1D45E01B00AD53E3 /* CPCardViewControllerDemo */ = {
+			isa = PBXGroup;
+			children = (
+				BB2D01F01D45E01B00AD53E3 /* AppDelegate.h */,
+				BB2D01F11D45E01B00AD53E3 /* AppDelegate.m */,
+				BB2D01F31D45E01B00AD53E3 /* ViewController.h */,
+				BB2D01F41D45E01B00AD53E3 /* ViewController.m */,
+				BB2D01F61D45E01B00AD53E3 /* Main.storyboard */,
+				BB2D01F91D45E01B00AD53E3 /* Assets.xcassets */,
+				BB2D01FB1D45E01B00AD53E3 /* LaunchScreen.storyboard */,
+				BB2D01FE1D45E01B00AD53E3 /* Info.plist */,
+				BB2D01ED1D45E01B00AD53E3 /* Supporting Files */,
+			);
+			path = CPCardViewControllerDemo;
+			sourceTree = "<group>";
+		};
+		BB2D01ED1D45E01B00AD53E3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BB2D01EE1D45E01B00AD53E3 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BB5B6B941D5C8C3E002FB68D /* CPCardViewController */ = {
+			isa = PBXGroup;
+			children = (
+				BB5B6B951D5C8C3E002FB68D /* CPCardViewController.h */,
+				BB5B6B961D5C8C3E002FB68D /* CPCardViewController.m */,
+				BB5B6B971D5C8C3E002FB68D /* UIImage+ImageEffects.h */,
+				BB5B6B981D5C8C3E002FB68D /* UIImage+ImageEffects.m */,
+				BB5B6B991D5C8C3E002FB68D /* UIImageView+LBBlurredImage.h */,
+				BB5B6B9A1D5C8C3E002FB68D /* UIImageView+LBBlurredImage.m */,
+				BBF07F481D5D6B3D0069DE08 /* CPCardViewCell.h */,
+				BBF07F491D5D6B3D0069DE08 /* CPCardViewCell.m */,
+			);
+			path = CPCardViewController;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BB2D01E91D45E01B00AD53E3 /* CPCardViewControllerDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BB2D02011D45E01B00AD53E3 /* Build configuration list for PBXNativeTarget "CPCardViewControllerDemo" */;
+			buildPhases = (
+				55D7DA75141EEA630A059ECC /* Check Pods Manifest.lock */,
+				BB2D01E61D45E01B00AD53E3 /* Sources */,
+				BB2D01E71D45E01B00AD53E3 /* Frameworks */,
+				BB2D01E81D45E01B00AD53E3 /* Resources */,
+				B136FFF17849EA147C77C2C2 /* Embed Pods Frameworks */,
+				DB20C66C841F03137B3B02AD /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CPCardViewControllerDemo;
+			productName = CPCardViewControllerDemo;
+			productReference = BB2D01EA1D45E01B00AD53E3 /* CPCardViewControllerDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BB2D01E21D45E01B00AD53E3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = cuppi;
+				TargetAttributes = {
+					BB2D01E91D45E01B00AD53E3 = {
+						CreatedOnToolsVersion = 7.3;
+					};
+				};
+			};
+			buildConfigurationList = BB2D01E51D45E01B00AD53E3 /* Build configuration list for PBXProject "CPCardViewControllerDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BB2D01E11D45E01B00AD53E3;
+			productRefGroup = BB2D01EB1D45E01B00AD53E3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BB2D01E91D45E01B00AD53E3 /* CPCardViewControllerDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BB2D01E81D45E01B00AD53E3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB2D01FD1D45E01B00AD53E3 /* LaunchScreen.storyboard in Resources */,
+				BB2D01FA1D45E01B00AD53E3 /* Assets.xcassets in Resources */,
+				BB2D02141D45E5D000AD53E3 /* image3.jpg in Resources */,
+				BB2D02151D45E5D000AD53E3 /* image4.jpg in Resources */,
+				BB2D02131D45E5D000AD53E3 /* image2.jpg in Resources */,
+				BB2D01F81D45E01B00AD53E3 /* Main.storyboard in Resources */,
+				BB2D02121D45E5D000AD53E3 /* image1.jpg in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		55D7DA75141EEA630A059ECC /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B136FFF17849EA147C77C2C2 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CPCardViewControllerDemo/Pods-CPCardViewControllerDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DB20C66C841F03137B3B02AD /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CPCardViewControllerDemo/Pods-CPCardViewControllerDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BB2D01E61D45E01B00AD53E3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB2D01F51D45E01B00AD53E3 /* ViewController.m in Sources */,
+				BB5B6B9C1D5C8C3E002FB68D /* UIImage+ImageEffects.m in Sources */,
+				BB5B6B9B1D5C8C3E002FB68D /* CPCardViewController.m in Sources */,
+				BB5B6B9D1D5C8C3E002FB68D /* UIImageView+LBBlurredImage.m in Sources */,
+				BBF07F4A1D5D6B3D0069DE08 /* CPCardViewCell.m in Sources */,
+				BB2D01F21D45E01B00AD53E3 /* AppDelegate.m in Sources */,
+				BB2D01EF1D45E01B00AD53E3 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		BB2D01F61D45E01B00AD53E3 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BB2D01F71D45E01B00AD53E3 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		BB2D01FB1D45E01B00AD53E3 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BB2D01FC1D45E01B00AD53E3 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BB2D01FF1D45E01B00AD53E3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BB2D02001D45E01B00AD53E3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BB2D02021D45E01B00AD53E3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 800CC026A9DDBF99BC70EF0D /* Pods-CPCardViewControllerDemo.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = CPCardViewControllerDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cuppi.CPCardViewControllerDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		BB2D02031D45E01B00AD53E3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0B58F083B0CABCC21C094D89 /* Pods-CPCardViewControllerDemo.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = CPCardViewControllerDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cuppi.CPCardViewControllerDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BB2D01E51D45E01B00AD53E3 /* Build configuration list for PBXProject "CPCardViewControllerDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BB2D01FF1D45E01B00AD53E3 /* Debug */,
+				BB2D02001D45E01B00AD53E3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BB2D02011D45E01B00AD53E3 /* Build configuration list for PBXNativeTarget "CPCardViewControllerDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BB2D02021D45E01B00AD53E3 /* Debug */,
+				BB2D02031D45E01B00AD53E3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BB2D01E21D45E01B00AD53E3 /* Project object */;
+}

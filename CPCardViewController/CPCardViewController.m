@@ -331,6 +331,7 @@ typedef struct IntegerInterval {
         [self willScrollToIndex:index];
         [self setSelectedIndex:index withAnimation:YES];
     }
+    
 }
 
 

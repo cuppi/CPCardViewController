@@ -164,7 +164,6 @@ typedef struct IntegerInterval {
     }
     _selectedIndex = selectedIndex;
     _pageControl.currentPage = _selectedIndex;
-    
     if (animation) {
         [UIView animateWithDuration:0.3 animations:^{
             _mainScrollView.contentOffset = CGPointMake(_imageViewWidth*selectedIndex, 0);
@@ -174,18 +173,18 @@ typedef struct IntegerInterval {
             }
         } completion:^(BOOL finished) {
             if (finished) {
-                if ([self.delegate respondsToSelector:@selector(CPCardViewController:didSelectedIndex:)]) {
-                    [self.delegate CPCardViewController:self didSelectedIndex:selectedIndex];
-                }
+//                if ([self.delegate respondsToSelector:@selector(CPCardViewController:didSelectedIndex:)]) {
+//                    [self.delegate CPCardViewController:self didSelectedIndex:selectedIndex];
+//                }
             }
         }];
     }
     else
     {
         _mainScrollView.contentOffset = CGPointMake(_imageViewWidth*selectedIndex, 0);
-        if ([self.delegate respondsToSelector:@selector(CPCardViewController:didSelectedIndex:)]) {
-            [self.delegate CPCardViewController:self didSelectedIndex:selectedIndex];
-        }
+//        if ([self.delegate respondsToSelector:@selector(CPCardViewController:didSelectedIndex:)]) {
+//            [self.delegate CPCardViewController:self didSelectedIndex:selectedIndex];
+//        }
     }
 }
 
@@ -262,6 +261,11 @@ typedef struct IntegerInterval {
     if (!self.delegate) {
         return;
     }
+    // 如果用户手指还在scrollView上
+    // 防止当用户拖拽到第一个之前或者最后一个之后 立刻停止滚动时 产生错误
+    if (scrollView.tracking) {
+        return;
+    }
     
     // 获取当前照片
     NSInteger selectedIndex = [self displayIndexForOffsetX:_mainScrollView.contentOffset.x];
@@ -270,6 +274,7 @@ typedef struct IntegerInterval {
         selectedIndex >= _count) {
         return;
     }
+    NSLog(@"pre:%ld   now:%ld", _selectedIndex, selectedIndex);
     _selectedIndex = selectedIndex;
     _pageControl.currentPage = _selectedIndex;
     

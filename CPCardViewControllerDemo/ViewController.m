@@ -81,4 +81,9 @@
      [viewController setSelectedIndex:index withAnimation:YES];
 }
 
+- (void)CPCardViewController:(CPCardViewController *)viewController didSelectedIndex:(NSInteger)index
+{
+ //   NSLog(@"selected");
+}
+
 @end

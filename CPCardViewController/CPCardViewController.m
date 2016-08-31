@@ -103,6 +103,7 @@ typedef struct IntegerInterval {
     _registerMap = [NSMutableDictionary dictionary];
     _autoScrollToClickIndex = NO;
     _showPageControl = YES;
+    _selectedIndex = 0;
 }
 
 - (void)createView
@@ -195,6 +196,8 @@ typedef struct IntegerInterval {
 
 - (void)reloadData
 {
+    _selectedIndex = 0;
+    
     _mainScrollView.contentOffset = CGPointZero;
     if (!self.delegate) {
         return;
@@ -274,7 +277,6 @@ typedef struct IntegerInterval {
         selectedIndex >= _count) {
         return;
     }
-    NSLog(@"pre:%ld   now:%ld", _selectedIndex, selectedIndex);
     _selectedIndex = selectedIndex;
     _pageControl.currentPage = _selectedIndex;
     

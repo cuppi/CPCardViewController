@@ -172,20 +172,11 @@ typedef struct IntegerInterval {
             for (UIView *cell in _cardCellList) {
                 [cell layoutIfNeeded];
             }
-        } completion:^(BOOL finished) {
-            if (finished) {
-                if ([self.delegate respondsToSelector:@selector(CPCardViewController:didSelectedIndex:)]) {
-                    [self.delegate CPCardViewController:self didSelectedIndex:selectedIndex];
-                }
-            }
         }];
     }
     else
     {
         _mainScrollView.contentOffset = CGPointMake(_imageViewWidth*selectedIndex, 0);
-        if ([self.delegate respondsToSelector:@selector(CPCardViewController:didSelectedIndex:)]) {
-            [self.delegate CPCardViewController:self didSelectedIndex:selectedIndex];
-        }
     }
 }
 

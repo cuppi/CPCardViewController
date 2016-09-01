@@ -23,6 +23,8 @@
 - (NSInteger)numberOfUrlInCPCardViewController:(CPCardViewController *)viewController;
 
 @optional
+
+// 编码格式不会调用这个方法
 - (void)CPCardViewController:(CPCardViewController *)viewController
             didSelectedIndex:(NSInteger)index;
 

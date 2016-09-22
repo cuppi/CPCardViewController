@@ -25,12 +25,16 @@
 @optional
 
 // 编码格式不会调用这个方法
+// 与上次一样将不会再调用 如果希望调用 请调用 CPCardViewController:didScrollToIndex:
 - (void)CPCardViewController:(CPCardViewController *)viewController
             didSelectedIndex:(NSInteger)index;
 
 - (void)CPCardViewController:(CPCardViewController *)viewController
            willScrollToIndex:(NSInteger)index
              isSelectedIndex:(BOOL)isSelectedIndex;
+
+- (void)CPCardViewController:(CPCardViewController *)viewController
+            didScrollToIndex:(NSInteger)index;
 
 - (void)CPCardViewController:(CPCardViewController *)viewController
                didClickIndex:(NSInteger)index

@@ -155,6 +155,7 @@ typedef struct IntegerInterval {
 
 - (void)setSelectedIndex:(NSInteger)selectedIndex
            withAnimation:(BOOL)animation
+            callDelegate:(BOOL)callDelegate
 {
     if (!self.delegate) {
         return;
@@ -164,7 +165,7 @@ typedef struct IntegerInterval {
         return;
     }
     _selectedIndex = selectedIndex;
-    _pageControl.currentPage = _selectedIndex;
+    _pageControl.currentPage = selectedIndex;
     if (animation) {
         [UIView animateWithDuration:0.3 animations:^{
             _mainScrollView.contentOffset = CGPointMake(_imageViewWidth*selectedIndex, 0);
@@ -172,12 +173,25 @@ typedef struct IntegerInterval {
             for (UIView *cell in _cardCellList) {
                 [cell layoutIfNeeded];
             }
+        } completion:^(BOOL finished) {
+            if (callDelegate && finished && [self.delegate respondsToSelector:@selector(CPCardViewController:didSelectedIndex:)]) {
+                [self.delegate CPCardViewController:self didSelectedIndex:selectedIndex];
+            }
         }];
     }
     else
     {
         _mainScrollView.contentOffset = CGPointMake(_imageViewWidth*selectedIndex, 0);
+        if (callDelegate && [self.delegate respondsToSelector:@selector(CPCardViewController:didSelectedIndex:)]) {
+            [self.delegate CPCardViewController:self didSelectedIndex:selectedIndex];
+        }
     }
+}
+
+- (void)setSelectedIndex:(NSInteger)selectedIndex
+           withAnimation:(BOOL)animation
+{
+    [self setSelectedIndex:selectedIndex withAnimation:animation callDelegate:NO];
 }
 
 - (UIView *)view
@@ -188,7 +202,6 @@ typedef struct IntegerInterval {
 - (void)reloadData
 {
     _selectedIndex = 0;
-    
     _mainScrollView.contentOffset = CGPointZero;
     if (!self.delegate) {
         return;
@@ -268,13 +281,18 @@ typedef struct IntegerInterval {
         selectedIndex >= _count) {
         return;
     }
+    BOOL isSameCell = _selectedIndex == selectedIndex;
     _selectedIndex = selectedIndex;
-    _pageControl.currentPage = _selectedIndex;
+    _pageControl.currentPage = selectedIndex;
     
     [self updateBlurImageView];
-    if ([self.delegate respondsToSelector:@selector(CPCardViewController:didSelectedIndex:)]) {
+    if ([self.delegate respondsToSelector:@selector(CPCardViewController:didScrollToIndex:)]) {
+        [self.delegate CPCardViewController:self didScrollToIndex:selectedIndex];
+    }
+    if (!isSameCell && [self.delegate respondsToSelector:@selector(CPCardViewController:didSelectedIndex:)]) {
         [self.delegate CPCardViewController:self didSelectedIndex:_selectedIndex];
     }
+    
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -327,7 +345,7 @@ typedef struct IntegerInterval {
     }
     if (_autoScrollToClickIndex && index != _selectedIndex) {
         [self willScrollToIndex:index];
-        [self setSelectedIndex:index withAnimation:YES];
+        [self setSelectedIndex:index withAnimation:YES callDelegate:YES];
     }
     
 }

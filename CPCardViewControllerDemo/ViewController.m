@@ -7,15 +7,15 @@
 //
 
 #import "ViewController.h"
-#import "CPCardViewController.h"
+#import "CPCardView.h"
 #import "UIImageView+WebCache.h"
 #import "CardCell.h"
 
-@interface ViewController () <CPCardViewControllerDelegate>
+@interface ViewController () <CPCardViewDelegate>
 {
     NSArray <NSString *>*_smallImageUrls;
     NSArray <NSString *>*_bigImageUrls;
-    CPCardViewController *_vc;
+    CPCardView *_cardView;
 }
 @end
 
@@ -47,12 +47,12 @@
 {
     CGFloat screenWidth = [[UIScreen mainScreen] bounds].size.width;
     // vc 目前只能使用全局变量。因为内部代理问题 
-    _vc = [[CPCardViewController alloc] initWithFrame:CGRectMake(0, 100, screenWidth, 200) withImageViewWidth:screenWidth*0.6 withImageViewHeight:200*0.7 withZoomScale:0.7];
-    [self.view addSubview:[_vc view]];
-    _vc.delegate = self;
-    _vc.autoScrollToClickIndex = YES;
-    [_vc registerClass:[CardCell class] forCellReuseIdentifier:@"CardCell"];
-    [_vc reloadData];
+    _cardView = [[CPCardView alloc] initWithFrame:CGRectMake(0, 100, screenWidth, 200) withImageViewWidth:screenWidth*0.6 withImageViewHeight:200*0.7 withZoomScale:0.7];
+    [self.view addSubview:_cardView];
+    _cardView.delegate = self;
+    _cardView.autoScrollToClickIndex = YES;
+    [_cardView registerClass:[CardCell class] forCellReuseIdentifier:@"CardCell"];
+    [_cardView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -61,27 +61,27 @@
 }
 
 #pragma mark -- CPCardViewController delegate
-- (NSInteger)numberOfUrlInCPCardViewController:(CPCardViewController *)viewController
+- (NSInteger)numberOfUrlInCPCardView:(CPCardView *)cardView
 {
     return _smallImageUrls.count*3;
 }
 
-- (NSURL *)CPCardViewController:(CPCardViewController *)viewController backUrlAtIndex:(NSInteger)index
+- (NSURL *)CPCardView:(CPCardView *)cardView backUrlAtIndex:(NSInteger)index
 {
     return [NSURL fileURLWithPath:_bigImageUrls[index%_bigImageUrls.count]];
 }
 
-- (void)CPCardViewController:(CPCardViewController *)viewController fillCell:(CPCardCell *)cell AtIndex:(NSInteger)index
+- (void)CPCardView:(CPCardView *)cardView fillCell:(CPCardCell *)cell AtIndex:(NSInteger)index
 {
     [cell.imageView sd_setImageWithURL:[NSURL fileURLWithPath:_smallImageUrls[index%4]] placeholderImage:nil];
 }
 
-- (void)CPCardViewController:(CPCardViewController *)viewController didClickIndex:(NSInteger)index isSelectedIndex:(BOOL)isSelectedIndex
+- (void)CPCardView:(CPCardView *)cardView didClickIndex:(NSInteger)index isSelectedIndex:(BOOL)isSelectedIndex
 {
-     [viewController setSelectedIndex:index withAnimation:YES];
+     [cardView setSelectedIndex:index withAnimation:YES];
 }
 
-- (void)CPCardViewController:(CPCardViewController *)viewController didSelectedIndex:(NSInteger)index
+- (void)CPCardView:(CPCardView *)cardView didSelectedIndex:(NSInteger)index
 {
  //   NSLog(@"selected");
 }

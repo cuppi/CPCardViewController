@@ -1,28 +1,27 @@
 //
-//  CPCardViewController.m
-//  PrepareCode
+//  CPCardView.m
+//  CPCardViewControllerDemo
 //
-//  Created by cuppi on 16/5/30.
+//  Created by cuppi on 2016/9/30.
 //  Copyright © 2016年 cuppi. All rights reserved.
 //
 
-#import "CPCardViewController.h"
+#import "CPCardView.h"
 #import "UIImage+ImageEffects.h"
 #import "UIImageView+WebCache.h"
-
 
 typedef struct IntegerInterval {
     CGFloat left;
     CGFloat right;
 }IntegerInterval;
 
-@interface CPCardViewController () <UIScrollViewDelegate>
+
+@interface UIView (__CP_CPGrid)
+
+@end
+
+@interface CPCardView () <UIScrollViewDelegate>
 {
-    
-    // 主View frame
-    CGRect _frame;
-    // 主View
-    UIView *_view;
     // 背景毛玻璃效果
     UIImageView *_blurImageView;
     // 主背景滑动视图
@@ -43,19 +42,18 @@ typedef struct IntegerInterval {
 }
 @end
 
-@implementation CPCardViewController
+
+@implementation CPCardView
 #pragma mark -- 构造方法
 - (instancetype)initWithFrame:(CGRect)frame
            withImageViewWidth:(CGFloat)imageViewWidth
           withImageViewHeight:(CGFloat)imageViewHeight
                 withZoomScale:(CGFloat)zoomScale
 {
-    
-    if (self = [super init]) {
-        _frame = frame;
+    if (self = [super initWithFrame:frame]) {
         _imageViewWidth = imageViewWidth;
         _imageViewHeight = imageViewHeight;
-        _scrollSideSpace = (CGRectGetWidth(_frame) - imageViewWidth)/2;
+        _scrollSideSpace = (CGRectGetWidth(frame) - imageViewWidth)/2;
         if (zoomScale > 0 && zoomScale < 1) {
             _zoomScale = zoomScale;
         }
@@ -64,7 +62,7 @@ typedef struct IntegerInterval {
             _zoomScale = 0.8;
         }
         [self createMetadata];
-        [self createView];
+        [self configureCardView];
         [self createBlurImageView];
         [self createScrollView];
         [self createPageControl];
@@ -106,24 +104,23 @@ typedef struct IntegerInterval {
     _selectedIndex = 0;
 }
 
-- (void)createView
+- (void)configureCardView
 {
-    _view = [[UIView alloc]initWithFrame:_frame];
-    _view.clipsToBounds = YES;
+    self.clipsToBounds = YES;
 }
 
 - (void)createBlurImageView
 {
     // 创建辅助imageView
-    _blurImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(_frame), CGRectGetHeight(_frame))];
-    [_view addSubview:_blurImageView];
+    _blurImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame))];
+    [self addSubview:_blurImageView];
 }
 
 - (void)createScrollView
 {
     // 创建主Scroll View
-    _mainScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(_frame), CGRectGetHeight(_frame))];
-    [_view addSubview:_mainScrollView];
+    _mainScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame))];
+    [self addSubview:_mainScrollView];
     _mainScrollView.clipsToBounds = NO;
     // 添加代理
     _mainScrollView.delegate = self;
@@ -132,8 +129,8 @@ typedef struct IntegerInterval {
 
 - (void)createPageControl
 {
-    _pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(0, CGRectGetHeight(_frame) - 40, CGRectGetWidth(_frame), 30)];
-    [_view addSubview:_pageControl];
+    _pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(0, CGRectGetHeight(self.frame) - 40, CGRectGetWidth(self.frame), 30)];
+    [self addSubview:_pageControl];
     _pageControl.currentPage = 0;
 }
 
@@ -160,7 +157,7 @@ typedef struct IntegerInterval {
     if (!self.delegate) {
         return;
     }
-    if (selectedIndex >= [self.delegate numberOfUrlInCPCardViewController:self] ||
+    if (selectedIndex >= [self.delegate numberOfUrlInCPCardView:self] ||
         selectedIndex < 0) {
         return;
     }
@@ -169,21 +166,21 @@ typedef struct IntegerInterval {
     if (animation) {
         [UIView animateWithDuration:0.3 animations:^{
             _mainScrollView.contentOffset = CGPointMake(_imageViewWidth*selectedIndex, 0);
-#warning 效率低
+#warning this is the low performance
             for (UIView *cell in _cardCellList) {
                 [cell layoutIfNeeded];
             }
         } completion:^(BOOL finished) {
-            if (callDelegate && finished && [self.delegate respondsToSelector:@selector(CPCardViewController:didSelectedIndex:)]) {
-                [self.delegate CPCardViewController:self didSelectedIndex:selectedIndex];
+            if (callDelegate && finished && [self.delegate respondsToSelector:@selector(CPCardView:didSelectedIndex:)]) {
+                [self.delegate CPCardView:self didSelectedIndex:selectedIndex];
             }
         }];
     }
     else
     {
         _mainScrollView.contentOffset = CGPointMake(_imageViewWidth*selectedIndex, 0);
-        if (callDelegate && [self.delegate respondsToSelector:@selector(CPCardViewController:didSelectedIndex:)]) {
-            [self.delegate CPCardViewController:self didSelectedIndex:selectedIndex];
+        if (callDelegate && [self.delegate respondsToSelector:@selector(CPCardView:didSelectedIndex:)]) {
+            [self.delegate CPCardView:self didSelectedIndex:selectedIndex];
         }
     }
 }
@@ -194,11 +191,6 @@ typedef struct IntegerInterval {
     [self setSelectedIndex:selectedIndex withAnimation:animation callDelegate:NO];
 }
 
-- (UIView *)view
-{
-    return _view;
-}
-
 - (void)reloadData
 {
     _selectedIndex = 0;
@@ -206,7 +198,7 @@ typedef struct IntegerInterval {
     if (!self.delegate) {
         return;
     }
-    _count = [self.delegate numberOfUrlInCPCardViewController:self];
+    _count = [self.delegate numberOfUrlInCPCardView:self];
     if (_count <= 0) {
         return;
     }
@@ -228,12 +220,12 @@ typedef struct IntegerInterval {
         {
             cell = [[_registerMap.allValues.firstObject alloc]init];
         }
-        cell.frame = CGRectMake(_scrollSideSpace + _imageViewWidth*i, (CGRectGetHeight(_frame) - _imageViewHeight)/2, _imageViewWidth, _imageViewHeight);
+        cell.frame = CGRectMake(_scrollSideSpace + _imageViewWidth*i, (CGRectGetHeight(self.frame) - _imageViewHeight)/2, _imageViewWidth, _imageViewHeight);
         cell.cp_maxWidth = _imageViewWidth;
         cell.cp_maxHeight = _imageViewHeight;
         [_mainScrollView addSubview:cell];
         [_cardCellList addObject:cell];
-        [self.delegate CPCardViewController:self fillCell:cell AtIndex:i];
+        [self.delegate CPCardView:self fillCell:cell AtIndex:i];
         cell.tag = i;
         [cell addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(actionClickImage:)]];
         if (i != 0)
@@ -253,7 +245,7 @@ typedef struct IntegerInterval {
     if (!self.delegate) {
         return;
     }
-    [_blurImageView sd_setImageWithURL:[self.delegate CPCardViewController:self backUrlAtIndex:_selectedIndex] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [_blurImageView sd_setImageWithURL:[self.delegate CPCardView:self backUrlAtIndex:_selectedIndex] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         if (image)
         {
             [self animationImageView:_blurImageView toImage:[image applyBlurWithRadius:10 tintColor:nil saturationDeltaFactor:1.8 maskImage:nil]];
@@ -286,11 +278,11 @@ typedef struct IntegerInterval {
     _pageControl.currentPage = selectedIndex;
     
     [self updateBlurImageView];
-    if ([self.delegate respondsToSelector:@selector(CPCardViewController:didScrollToIndex:)]) {
-        [self.delegate CPCardViewController:self didScrollToIndex:selectedIndex];
+    if ([self.delegate respondsToSelector:@selector(CPCardView:didScrollToIndex:)]) {
+        [self.delegate CPCardView:self didScrollToIndex:selectedIndex];
     }
-    if (!isSameCell && [self.delegate respondsToSelector:@selector(CPCardViewController:didSelectedIndex:)]) {
-        [self.delegate CPCardViewController:self didSelectedIndex:_selectedIndex];
+    if (!isSameCell && [self.delegate respondsToSelector:@selector(CPCardView:didSelectedIndex:)]) {
+        [self.delegate CPCardView:self didSelectedIndex:_selectedIndex];
     }
     
 }
@@ -310,13 +302,13 @@ typedef struct IntegerInterval {
         *targetContentOffset = CGPointMake(0, 0);
         return;
     }
-    if (needTargetOffsetX > scrollView.contentSize.width - CGRectGetWidth(_frame)) {
-        [self willScrollToIndex:[self.delegate numberOfUrlInCPCardViewController:self] - 1];
+    if (needTargetOffsetX > scrollView.contentSize.width - CGRectGetWidth(self.frame)) {
+        [self willScrollToIndex:[self.delegate numberOfUrlInCPCardView:self] - 1];
         *targetContentOffset = CGPointMake(scrollView.contentSize.width, 0);
         return;
     }
     
-    CGFloat needTargetCenterX = needTargetOffsetX + CGRectGetWidth(_frame)/2;
+    CGFloat needTargetCenterX = needTargetOffsetX + CGRectGetWidth(self.frame)/2;
     
     NSInteger pureOffsetX = nearbyintf(needTargetCenterX - _scrollSideSpace);
     NSInteger imageViewWidthInt = nearbyintf(_imageViewWidth);
@@ -331,7 +323,7 @@ typedef struct IntegerInterval {
     {
         actualTargetCenterX = (preImageCount*_imageViewWidth - _imageViewWidth/2 + _scrollSideSpace);
     }
-    CGFloat actualTargetOffsetX = actualTargetCenterX - CGRectGetWidth(_frame)/2;
+    CGFloat actualTargetOffsetX = actualTargetCenterX - CGRectGetWidth(self.frame)/2;
     [self willScrollToIndex:(NSInteger)nearbyintf(actualTargetOffsetX/_imageViewWidth)];
     *targetContentOffset = CGPointMake(actualTargetOffsetX, 0);
 }
@@ -340,8 +332,8 @@ typedef struct IntegerInterval {
 - (void)actionClickImage:(UIGestureRecognizer *)gesture
 {
     NSInteger index = gesture.view.tag;
-    if ([self.delegate respondsToSelector:@selector(CPCardViewController:didClickIndex:isSelectedIndex:)]) {
-        [self.delegate CPCardViewController:self didClickIndex:index isSelectedIndex:index == _selectedIndex];
+    if ([self.delegate respondsToSelector:@selector(CPCardView:didClickIndex:isSelectedIndex:)]) {
+        [self.delegate CPCardView:self didClickIndex:index isSelectedIndex:index == _selectedIndex];
     }
     if (_autoScrollToClickIndex && index != _selectedIndex) {
         [self willScrollToIndex:index];
@@ -362,7 +354,7 @@ typedef struct IntegerInterval {
     CGFloat zoomWidthBias = (1 - _zoomScale)*selectedImageWidth;
     CGFloat zoomHeightBias = (1 - _zoomScale)*selectedImageHeight;
     CGFloat offsetX = _mainScrollView.contentOffset.x;
-    CGFloat windowOffset = (CGRectGetWidth(_frame) - selectedImageWidth)/2;
+    CGFloat windowOffset = (CGRectGetWidth(self.frame) - selectedImageWidth)/2;
     
     for (NSInteger i = 0; i < _count; i++) {
         CPCardCell *cell = _cardCellList[i];
@@ -385,11 +377,11 @@ typedef struct IntegerInterval {
 // 将要滚动到指定索引
 - (void)willScrollToIndex:(NSInteger)index
 {
-    if (!(index >= 0 && index < [self.delegate numberOfUrlInCPCardViewController:self])) {
+    if (!(index >= 0 && index < [self.delegate numberOfUrlInCPCardView:self])) {
         return;
     }
-    if ([self.delegate respondsToSelector:@selector(CPCardViewController:willScrollToIndex:isSelectedIndex:)]) {
-        [self.delegate CPCardViewController:self willScrollToIndex:index isSelectedIndex:index == _selectedIndex];
+    if ([self.delegate respondsToSelector:@selector(CPCardView:willScrollToIndex:isSelectedIndex:)]) {
+        [self.delegate CPCardView:self willScrollToIndex:index isSelectedIndex:index == _selectedIndex];
     }
 }
 
@@ -424,5 +416,5 @@ typedef struct IntegerInterval {
     imageView.image = image;
 }
 
-@end
 
+@end
